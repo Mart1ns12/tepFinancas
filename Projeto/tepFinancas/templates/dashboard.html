@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Carregando a tag static -->
+    {% load static %}
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            border-radius: 15px;
+        }
+
+        .circle-chart {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 15px solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .yellow {
+            border-color: #f7b400;
+            color: #f7b400;
+        }
+
+        .red {
+            border-color: #d9534f;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Dashboard</h2>
+
+        <!-- Cards -->
+        <div class="row text-center mb-4">
+            <div class="col-md-3">
+                <div class="card p-3 shadow-sm">
+                    <h6>Saldo Atual</h6>
+                    <p id="saldoAtual" class="fs-4">R$ 0,00</p> <!-- Zerei aqui -->
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 shadow-sm">
+                    <h6>Receitas</h6>
+                    <p id="receitas" class="fs-4 text-success">R$ 0,00</p> <!-- Zerei aqui -->
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 shadow-sm">
+                    <h6>Despesas</h6>
+                    <p id="despesas" class="fs-4 text-danger">R$ 0,00</p> <!-- Zerei aqui -->
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card p-3 shadow-sm">
+                    <h6>Cartão de Crédito</h6>
+                    <p class="fs-4">R$ ,00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input and Buttons -->
+        <div class="row text-center mb-4">
+            <div class="col-md-6 mx-auto">
+                <div class="input-group">
+                    <input type="number" id="valorInput" class="form-control" placeholder="Digite o valor" aria-label="Digite o valor">
+                    <button class="btn btn-success" id="btnAdicionarReceita" type="button">Adicionar Receita</button>
+                    <button class="btn btn-danger" id="btnAdicionarDespesa" type="button">Adicionar Despesa</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="row text-center">
+            <div class="col-md-6">
+                <h6>Despesas por categoria</h6>
+                <div class="circle-chart yellow mx-auto">
+                    R$ 0,00
+                </div>    
+            </div>
+            <div class="col-md-6">
+                <h6>Receitas por categoria</h6>
+                <div class="circle-chart red mx-auto">
+                    R$ 0,00
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/dashboard.js' %}"></script>
+</body>
+</html>
