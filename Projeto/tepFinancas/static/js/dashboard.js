@@ -1,43 +1,125 @@
+// Função para validar o valor inserido
 function valorInvalido(valor) {
     return isNaN(valor) || valor <= 0;
 }
 
-document.querySelector("#btnAdicionarReceita").addEventListener("click", function () {
-    let valor = parseFloat(document.querySelector("#valorInput").value);
-    
-    // Verifica se o valor inserido é válido
-    if (valorInvalido(valor)) {
-        alert('Por favor, insira um valor válido.');
-        return;
+// Função para formatar o valor como moeda
+function formatarMoeda(valor) {
+    return `R$ ${valor.toFixed(2).replace('.', ',')}`;
+}
+
+// Função para registrar na tabela
+function registrarNaTabela(operacao, tipo, valor) {
+    const tabelaCorpo = document.querySelector("#transactionTableBody");
+    const novaLinha = document.createElement("tr");
+
+    const dataHora = new Date().toLocaleString("pt-BR");
+
+    novaLinha.innerHTML = `
+        <td>${dataHora}</td>
+        <td>${operacao}</td>
+        <td>${tipo}</td>
+        <td>${formatarMoeda(valor)}</td>
+    `;
+
+    tabelaCorpo.appendChild(novaLinha);
+}
+
+// Atualiza valores
+function atualizarValor(id, valor, operacao) {
+    const elemento = document.querySelector(id);
+    let valorAtual = parseFloat(
+        elemento.textContent.replace("R$", "").trim().replace(",", ".")
+    ) || 0;
+
+    if (operacao === "adicionar") {
+        valorAtual += valor;
+    } else if (operacao === "deduzir") {
+        if (valor > valorAtual) {
+            alert(`Não é possível deduzir mais do que o valor atual de ${id}.`);
+            return false;
+        }
+        valorAtual -= valor;
     }
 
-    // Obtém o valor atual de receitas
-    let receitaAtual = parseFloat(document.querySelector("#receitas").textContent.replace("R$", "").trim());
-    receitaAtual += valor;
+    elemento.textContent = formatarMoeda(valorAtual);
+    return true;
+}
 
-    // Atualiza o valor de receitas
-    document.querySelector("#receitas").textContent = "R$ " + receitaAtual.toFixed(2);
-
-    // Limpa o campo de entrada após adicionar
-    document.querySelector("#valorInput").value = '';
+// Evento para Adicionar Saldo
+document.querySelector("#btnAdicionarSaldo").addEventListener("click", function () {
+    const valor = parseFloat(document.querySelector("#valorInput").value);
+    if (valorInvalido(valor)) {
+        alert("Por favor, insira um valor válido.");
+        return;
+    }
+    if (atualizarValor("#saldoAtual", valor, "adicionar")) {
+        registrarNaTabela("Adicionar", "Saldo", valor);
+    }
+    document.querySelector("#valorInput").value = "";
 });
 
-document.querySelector("#btnAdicionarDespesa").addEventListener("click", function () {
-    let valor = parseFloat(document.querySelector("#valorInput").value);
-
-    // Verifica se o valor inserido é válido
+// Evento para Deduzir Saldo
+document.querySelector("#btnDeduzirSaldo").addEventListener("click", function () {
+    const valor = parseFloat(document.querySelector("#valorInput").value);
     if (valorInvalido(valor)) {
-        alert('Por favor, insira um valor válido.');
+        alert("Por favor, insira um valor válido.");
         return;
     }
+    if (atualizarValor("#saldoAtual", valor, "deduzir")) {
+        registrarNaTabela("Deduzir", "Saldo", valor);
+    }
+    document.querySelector("#valorInput").value = "";
+});
 
-    // Obtém o valor atual de despesas
-    let despesaAtual = parseFloat(document.querySelector("#despesas").textContent.replace("R$", "").trim());
-    despesaAtual += valor;
+// Evento para Adicionar Receita
+document.querySelector("#btnAdicionarReceita").addEventListener("click", function () {
+    const valor = parseFloat(document.querySelector("#valorInput").value);
+    if (valorInvalido(valor)) {
+        alert("Por favor, insira um valor válido.");
+        return;
+    }
+    if (atualizarValor("#receitas", valor, "adicionar")) {
+        registrarNaTabela("Adicionar", "Receita", valor);
+    }
+    document.querySelector("#valorInput").value = "";
+});
 
-    // Atualiza o valor de despesas
-    document.querySelector("#despesas").textContent = "R$ " + despesaAtual.toFixed(2);
+// Evento para Deduzir Receita
+document.querySelector("#btnDeduzirReceita").addEventListener("click", function () {
+    const valor = parseFloat(document.querySelector("#valorInput").value);
+    if (valorInvalido(valor)) {
+        alert("Por favor, insira um valor válido.");
+        return;
+    }
+    if (atualizarValor("#receitas", valor, "deduzir")) {
+        registrarNaTabela("Deduzir", "Receita", valor);
+    }
+    document.querySelector("#valorInput").value = "";
+});
 
-    // Limpa o campo de entrada após adicionar
-    document.querySelector("#valorInput").value = '';
+// Evento para Adicionar Despesa
+document.querySelector("#btnAdicionarDespesa").addEventListener("click", function () {
+    const valor = parseFloat(document.querySelector("#valorInput").value);
+    if (valorInvalido(valor)) {
+        alert("Por favor, insira um valor válido.");
+        return;
+    }
+    if (atualizarValor("#despesas", valor, "adicionar")) {
+        registrarNaTabela("Adicionar", "Despesa", valor);
+    }
+    document.querySelector("#valorInput").value = "";
+});
+
+// Evento para Deduzir Despesa
+document.querySelector("#btnDeduzirDespesa").addEventListener("click", function () {
+    const valor = parseFloat(document.querySelector("#valorInput").value);
+    if (valorInvalido(valor)) {
+        alert("Por favor, insira um valor válido.");
+        return;
+    }
+    if (atualizarValor("#despesas", valor, "deduzir")) {
+        registrarNaTabela("Deduzir", "Despesa", valor);
+    }
+    document.querySelector("#valorInput").value = "";
 });
