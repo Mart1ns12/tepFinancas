@@ -77,31 +77,6 @@ function atualizarValor(id, valor, operacao) {
     return true;
 }
 
-// Evento para Adicionar Saldo
-document.querySelector("#btnAdicionarSaldo").addEventListener("click", function () {
-    const valor = parseFloat(document.querySelector("#valorInput").value);
-    if (valorInvalido(valor)) {
-        alert("Por favor, insira um valor válido.");
-        return;
-    }
-    if (atualizarValor("#saldoAtual", valor, "adicionar")) {
-        registrarNaTabela("Adicionar", "Saldo", valor);
-    }
-    document.querySelector("#valorInput").value = "";
-});
-
-// Evento para Deduzir Saldo
-document.querySelector("#btnDeduzirSaldo").addEventListener("click", function () {
-    const valor = parseFloat(document.querySelector("#valorInput").value);
-    if (valorInvalido(valor)) {
-        alert("Por favor, insira um valor válido.");
-        return;
-    }
-    if (atualizarValor("#saldoAtual", valor, "deduzir")) {
-        registrarNaTabela("Deduzir", "Saldo", valor);
-    }
-    document.querySelector("#valorInput").value = "";
-});
 
 // Evento para Adicionar Receita
 document.querySelector("#btnAdicionarReceita").addEventListener("click", function () {
@@ -117,18 +92,6 @@ document.querySelector("#btnAdicionarReceita").addEventListener("click", functio
     enviarDadosParaBanco(valor, "Receita");
 });
 
-// Evento para Deduzir Receita
-document.querySelector("#btnDeduzirReceita").addEventListener("click", function () {
-    const valor = parseFloat(document.querySelector("#valorInput").value);
-    if (valorInvalido(valor)) {
-        alert("Por favor, insira um valor válido.");
-        return;
-    }
-    if (atualizarValor("#receitas", valor, "deduzir")) {
-        registrarNaTabela("Deduzir", "Receita", valor);
-    }
-    document.querySelector("#valorInput").value = "";
-});
 
 // Evento para Adicionar Despesa
 document.querySelector("#btnAdicionarDespesa").addEventListener("click", function () {
@@ -144,17 +107,5 @@ document.querySelector("#btnAdicionarDespesa").addEventListener("click", functio
     enviarDadosParaBanco(valor, "Despesa");
 });
 
-// Evento para Deduzir Despesa
-document.querySelector("#btnDeduzirDespesa").addEventListener("click", function () {
-    const valor = parseFloat(document.querySelector("#valorInput").value);
-    if (valorInvalido(valor)) {
-        alert("Por favor, insira um valor válido.");
-        return;
-    }
-    if (atualizarValor("#despesas", valor, "deduzir")) {
-        registrarNaTabela("Deduzir", "Despesa", valor);
-    }
-    document.querySelector("#valorInput").value = "";
-});
 
 
