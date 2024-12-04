@@ -11,7 +11,7 @@ function enviarDadosParaBanco(valor, tipo) {
             "Content-Type": "application/x-www-form-urlencoded",
             "X-CSRFToken": getCSRFToken(),
         },
-        body: `valor=${encodeURIComponent(valor)}&tipo=${encodeURIComponent(tipo)}`
+        body: `valor=${encodeURIComponent(valor)}&tipo=${encodeURIComponent(tipo)&data=${encodeURIComponent(data)}`
     })
     .then(response => {
         if (!response.ok) {
@@ -54,6 +54,7 @@ function registrarNaTabela(operacao, tipo, valor) {
     `;
 
     tabelaCorpo.appendChild(novaLinha);
+    enviarDadosParaBanco(data, tipo);
 }
 
 // Atualiza valores

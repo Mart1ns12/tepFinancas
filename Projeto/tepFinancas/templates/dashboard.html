@@ -14,24 +14,42 @@
             color: #f1f1f1;
         }
         .card {
-            background-color: #2c2c2c;
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: #f1f1f1;
-        }
-        .table-striped > tbody > tr:nth-of-type(odd) {
-            background-color: #3a3a3a;
-            color: #f1f1f1;
-        }
-        .table-striped > tbody > tr:nth-of-type(even) {
-            background-color: #4a4a4a;
-            color: #ffffff;
-        }
-        .table-striped > thead > tr {
-            background-color: #4a4a4a;
-            color: #ffffff;
-        }
+    background-color: #2c2c2c;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #f1f1f1;
+    }
+
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: #3a3a3a;
+    }
+
+    .table-striped > tbody > tr:nth-of-type(even) {
+        background-color: #4a4a4a;
+    }
+
+    .table-striped > thead > tr {
+        background-color: #4a4a4a;
+        color: #ffffff;
+    }
+
+    /* Estilo para todas as células da tabela */
+    .table-striped tbody td {
+        color: #ffffff !important; /* Dourado ou qualquer outra cor desejada */
+
+    }
+
+    /* Caso queira aplicar uma cor diferente apenas nos valores (não nas células de cabeçalho) */
+    .table-striped tbody td {
+        color: #ffffff !important; /* Exemplo: Dourado */
+    }
+
+    /* Se necessário, também aplique para o cabeçalho (se for diferente) */
+    .table-striped thead th {
+        color: #FFFFFF;
+    }
+        
         input.form-control {
             background-color: #3a3a3a;
             border: 2px solid #4a90e2; /* Azul elegante */

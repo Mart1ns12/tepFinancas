@@ -4,6 +4,7 @@ from django.db import models
 class dados(models.Model):
     valor = models.IntegerField()
     tipo = models.CharField(max_length=50)
+    data = models.CharField(max_length=50)
 
 
     def __str__(self):
