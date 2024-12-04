@@ -1,3 +1,34 @@
+// obtem token de acesso
+function getCSRFToken() {
+    return document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+}
+
+// funcao que envia dados ao banco
+function enviarDadosParaBanco(valor, tipo) {
+    fetch("/criar-item-ajax/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": getCSRFToken(),
+        },
+        body: `valor=${encodeURIComponent(valor)}&tipo=${encodeURIComponent(tipo)}`
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Dados recebidos:", data);
+    })
+    .catch(error => {
+        console.error("Erro ao processar a requisição:", error);
+    });
+}
+
+
+
 // Função para validar o valor inserido
 function valorInvalido(valor) {
     return isNaN(valor) || valor <= 0;
@@ -10,7 +41,7 @@ function formatarMoeda(valor) {
 
 // Função para registrar na tabela
 function registrarNaTabela(operacao, tipo, valor) {
-    const tabelaCorpo = document.querySelector("#transactionTableBody");
+    const tabelaCorpo = document.querySelector("#transactionTable");
     const novaLinha = document.createElement("tr");
 
     const dataHora = new Date().toLocaleString("pt-BR");
@@ -83,6 +114,7 @@ document.querySelector("#btnAdicionarReceita").addEventListener("click", functio
         registrarNaTabela("Adicionar", "Receita", valor);
     }
     document.querySelector("#valorInput").value = "";
+    enviarDadosParaBanco(valor, "Receita");
 });
 
 // Evento para Deduzir Receita
@@ -109,6 +141,7 @@ document.querySelector("#btnAdicionarDespesa").addEventListener("click", functio
         registrarNaTabela("Adicionar", "Despesa", valor);
     }
     document.querySelector("#valorInput").value = "";
+    enviarDadosParaBanco(valor, "Despesa");
 });
 
 // Evento para Deduzir Despesa
@@ -123,3 +156,5 @@ document.querySelector("#btnDeduzirDespesa").addEventListener("click", function 
     }
     document.querySelector("#valorInput").value = "";
 });
+
+

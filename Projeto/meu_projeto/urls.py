@@ -21,5 +21,6 @@ from tepFinancas.views import dashboard
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', dashboard, name='dashboard'),  # Rota já definida
-    path('', dashboard, name='home'),  # Inclui as URLs do aplicativo
+    path('', dashboard, name='home'),
+    path('', include('tepFinancas.urls'))# Inclui as URLs do aplicativo
 ]
