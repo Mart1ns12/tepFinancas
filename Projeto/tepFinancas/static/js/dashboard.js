@@ -5,7 +5,7 @@ function getCSRFToken() {
 
 // funcao que envia dados ao banco
 function enviarDadosParaBanco(valor, tipo) {
-    fetch("/criar-item-ajax/", {
+    fetch("tepFinancas/criar-item-ajax/", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",

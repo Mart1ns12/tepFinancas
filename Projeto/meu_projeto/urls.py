@@ -17,10 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from tepFinancas.views import dashboard
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', dashboard, name='dashboard'),  # Rota já definida
     path('', dashboard, name='home'),
-    path('', include('tepFinancas.urls'))# Inclui as URLs do aplicativo
+    path('tepFinancas/', include('tepFinancas.urls'))# Inclui as URLs do aplicativo
 ]

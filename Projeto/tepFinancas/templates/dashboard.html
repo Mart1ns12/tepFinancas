@@ -13,35 +13,42 @@
             background-color: #3a3a3a;
             color: #f1f1f1;
         }
-        .card {
-            background-color: #2c2c2c;
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: #f1f1f1;
-        }
-        .table-striped > tbody > tr:nth-of-type(odd) {
-            background-color: #3a3a3a;
-            color: #f1f1f1;
-        }
-        .table-striped > tbody > tr:nth-of-type(even) {
-            background-color: #4a4a4a;
-            color: #ffffff;
-        }
-        .table-striped > thead > tr {
-            background-color: #4a4a4a;
-            color: #ffffff;
-        }
-        input.form-control {
-            background-color: #3a3a3a;
-            border: 2px solid #4a90e2; /* Azul elegante */
-            color: #f1f1f1;
-            border-radius: 8px;
-            padding: 10px;
-        }
-        input.form-control::placeholder {
-            color: #bbbbbb;
-        }
+    .card {
+        background-color: #2c2c2c;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        color: #f1f1f1;
+    }
+
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: #3a3a3a;
+    }
+
+    .table-striped > tbody > tr:nth-of-type(even) {
+        background-color: #4a4a4a;
+    }
+
+    .table-striped > thead > tr {
+        background-color: #4a4a4a;
+        color: #ffffff;
+    }
+
+    /* Estilo para todas as células da tabela */
+    .table-striped tbody td {
+        color: #f1f1f1 !important; /* Dourado ou qualquer outra cor desejada */
+
+    }
+
+    /* Caso queira aplicar uma cor diferente apenas nos valores (não nas células de cabeçalho) */
+    .table-striped tbody td {
+        color: #f1f1f1 !important; /* Exemplo: Dourado */
+    }
+
+    /* Se necessário, também aplique para o cabeçalho (se for diferente) */
+    .table-striped thead th {
+        color: #FFFFFF;
+    }
         /* Estilo para os botões de incremento/decremento */
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button {
