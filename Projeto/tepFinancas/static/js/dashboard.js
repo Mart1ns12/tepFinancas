@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// Obtém o token CSRF
+// Obtém o token CSRF (Segurança)
 function getCSRFToken() {
     return document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 }
@@ -27,7 +27,6 @@ function enviarDadosParaBanco(valor, tipo) {
 }
 
 // Função para carregar dados do banco ao inicializar
-// Função para carregar dados do banco ao inicializar
 function carregarDadosDoBanco() {
     fetch("/tepFinancas/obter-dados-ajax/", {
         method: "GET",
@@ -43,7 +42,7 @@ function carregarDadosDoBanco() {
         return response.json();
     })
     .then(dados => {
-        console.log("Dados carregados:", dados);  // Verifique se o 'id' está presente
+        console.log("Dados carregados:", dados);
         atualizarTabelaEDados(dados);
     })
     .catch(error => {
@@ -54,7 +53,7 @@ function carregarDadosDoBanco() {
 // Função para atualizar a tabela com os dados carregados
 function atualizarTabelaEDados(dados) {
     const tabelaCorpo = document.querySelector("#transactionTable");
-    tabelaCorpo.innerHTML = ""; // Limpa a tabela
+    tabelaCorpo.innerHTML = ""; 
 
     let totalReceitas = 0;
     let totalDespesas = 0;
@@ -67,7 +66,6 @@ function atualizarTabelaEDados(dados) {
             <td>${item.tipo}</td>
             <td>${formatarMoeda(item.valor)}</td>
             <td>
-                <!-- Certifique-se de que o ID está sendo passado corretamente para o onclick -->
                 <button class="btn btn-danger btn-sm" onclick="excluirLinha(${item.id})">Excluir</button>
             </td>
         `;
@@ -121,7 +119,7 @@ function registrarNaTabela(tipo, valor) {
 function excluirLinha(itemId) {
     const csrfToken = getCSRFToken();
     
-    console.log("Dados enviados para o backend:", { id: itemId }); // Verificar o que está sendo enviado
+    console.log("Dados enviados para o backend:", { id: itemId }); 
 
     if (!itemId) {
         console.error("ID inválido.");
@@ -134,10 +132,10 @@ function excluirLinha(itemId) {
             "Content-Type": "application/json",
             "X-CSRFToken": csrfToken,
         },
-        body: JSON.stringify({ id: itemId }), // Certifique-se de que está enviando o ID correto
+        body: JSON.stringify({ id: itemId }), 
     })
         .then(response => {
-            console.log("Resposta do backend:", response); // Exibir detalhes da resposta
+            console.log("Resposta do backend:", response); 
             if (!response.ok) {
                 throw new Error(`Erro ao excluir: ${response.status}`);
             }
